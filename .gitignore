@@ -1,0 +1,22 @@
+﻿# Кроме foo.html который включается в индекс вручную.
+# !foo.html ! foo.html
+# Игнорировать папки \bin
+\bin
+# Игнорировать папки \obj
+\obj
+# Игнорировать папки \TestResults
+\TestResults
+# Игнорировать временные файлы
+*.suo
+*.user
+*.cachefile
+*.cache
+*.docstates
+*.orig
+*.ldb
+*.vs10x
+*.db
+*.vsp
+*.~*
+**/*.prj/*.xml
+_Resharper.*

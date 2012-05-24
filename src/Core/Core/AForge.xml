@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AForge</name>
+    </assembly>
+    <members>
+        <member name="T:AForge.Parallel">
+             <summary>
+             The class provides support for parallel computations, paralleling loop's iterations.
+             </summary>
+             
+             <remarks><para>The class allows to parallel loop's iteration computing them in separate threads,
+             what allows their simultaneous execution on multiple CPUs/cores.
+             </para></remarks>
+            
+        </member>
+        <member name="M:AForge.Parallel.For(System.Int32,System.Int32,AForge.Parallel.ForLoopBody)">
+            <summary>
+            Executes a for-loop in which iterations may run in parallel. 
+            </summary>
+            
+            <param name="start">Loop's start index.</param>
+            <param name="stop">Loop's stop index.</param>
+            <param name="loopBody">Loop's body.</param>
+            
+            <remarks><para>The method is used to parallel for-loop running its iterations in
+            different threads. The <b>start</b> and <b>stop</b> parameters define loop's
+            starting and ending loop's indexes. The number of iterations is equal to <b>stop - start</b>.
+            </para>
+            
+            <para>Sample usage:</para>
+            <code>
+            Parallel.For( 0, 20, delegate( int i )
+            // which is equivalent to
+            // for ( int i = 0; i &lt; 20; i++ )
+            {
+                System.Diagnostics.Debug.WriteLine( "Iteration: " + i );
+                // ...
+            } );
+            </code>
+            </remarks>
+            
+        </member>
+        <member name="P:AForge.Parallel.ThreadsCount">
+            <summary>
+            Number of threads used for parallel computations.
+            </summary>
+            
+            <remarks><para>The property sets how many worker threads are created for paralleling
+            loops' computations.</para>
+            
+            <para>By default the property is set to number of CPU's in the system
+            (see <see cref="P:System.Environment.ProcessorCount"/>).</para>
+            </remarks>
+            
+        </member>
+        <member name="T:AForge.Parallel.ForLoopBody">
+            <summary>
+            Delegate defining for-loop's body.
+            </summary>
+            
+            <param name="index">Loop's index.</param>
+            
+        </member>
+    </members>
+</doc>

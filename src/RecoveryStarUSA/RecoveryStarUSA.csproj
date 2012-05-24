@@ -1,0 +1,224 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{FB9D493C-2EF2-41DB-B2DB-7BD8379DAC92}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RecoveryStar</RootNamespace>
+    <AssemblyName>RecoveryStarUSA</AssemblyName>
+    <ApplicationIcon>RecoveryStar.ico</ApplicationIcon>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <PublishUrl>http://localhost/RecoveryStar/</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>25</ApplicationRevision>
+    <ApplicationVersion>1.6.0.25</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AboutForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutForm.Designer.cs">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BenchmarkForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BenchmarkForm.Designer.cs">
+      <DependentUpon>BenchmarkForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PasswordForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PasswordForm.Designer.cs">
+      <DependentUpon>PasswordForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProcessForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProcessForm.Designer.cs">
+      <DependentUpon>ProcessForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AboutForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BenchmarkForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>BenchmarkForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PasswordForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PasswordForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProcessForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ProcessForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PinkieControls\PinkieControls\PinkieControls.csproj">
+      <Project>{E914CA8F-4AE9-4ACA-9E2C-A4D285FFBF02}</Project>
+      <Name>PinkieControls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Common\Common.csproj">
+      <Project>{CE1D39CE-068D-4427-8E08-678B9A835E34}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CRC-64\CRC-64\CRC-64.csproj">
+      <Project>{83ADA005-B2D2-4B9C-A50A-03E4B0F09E96}</Project>
+      <Name>CRC-64</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FileAnalyzer\FileAnalyzer\FileAnalyzer.csproj">
+      <Project>{2B482EF1-71D2-4D9C-9CDF-C2EDFE4BCB60}</Project>
+      <Name>FileAnalyzer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FileBrowser\FileBrowser\FileBrowser.csproj">
+      <Project>{FC8064DF-B0BC-4D03-B1AE-077F3387412C}</Project>
+      <Name>FileBrowser</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FileCodec\FileCodec\FileCodec.csproj">
+      <Project>{5FC6C837-A88F-495C-AC83-E3ADC8080F53}</Project>
+      <Name>FileCodec</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FileNamer\FileNamer\FileNamer.csproj">
+      <Project>{4E08D8CB-B0A2-4E96-8A12-1138ACEB9687}</Project>
+      <Name>FileNamer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FileSplitter\FileSplitter\FileSplitter.csproj">
+      <Project>{32F7C188-9ECB-4C49-BD12-1290D3B4A62B}</Project>
+      <Name>FileSplitter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MACTrackBarLib\MACTrackBarLib\MACTrackBarLib.csproj">
+      <Project>{3ABEE454-72A3-402E-BA79-CC0D875D02B0}</Project>
+      <Name>MACTrackBarLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RecoveryStarCORE\RecoveryStarCORE\RecoveryStarCORE.csproj">
+      <Project>{344DC911-835B-4C41-B90C-CD1FA78484A3}</Project>
+      <Name>RecoveryStarCORE</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RS-RAID\RS-RAID\RS-RAID.csproj">
+      <Project>{4812BA70-4ED4-435D-B5DA-F6E6D2EC5176}</Project>
+      <Name>RS-RAID</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="RecoveryStar.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PostBuildEvent>copy $(TargetDir)$(TargetFileName) ..\\..\\..\\..\\bin</PostBuildEvent>
+  </PropertyGroup>
+</Project>
