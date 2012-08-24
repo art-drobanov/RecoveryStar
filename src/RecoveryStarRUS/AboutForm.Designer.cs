@@ -71,7 +71,7 @@ namespace RecoveryStar
             this.RecoveryStarLabel.Name = "RecoveryStarLabel";
             this.RecoveryStarLabel.Size = new System.Drawing.Size(117, 13);
             this.RecoveryStarLabel.TabIndex = 0;
-            this.RecoveryStarLabel.Text = "Recovery Star 2.20";
+            this.RecoveryStarLabel.Text = "Recovery Star 2.21";
             // 
             // copyrightListBox
             // 
@@ -161,7 +161,7 @@ namespace RecoveryStar
             this.Name = "AboutForm";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = " О программе Recovery Star 2.20 (23.05.2012)";
+            this.Text = " О программе Recovery Star 2.21 (24.08.2012)";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AboutForm_FormClosing);
             this.Load += new System.EventHandler(this.AboutForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).EndInit();

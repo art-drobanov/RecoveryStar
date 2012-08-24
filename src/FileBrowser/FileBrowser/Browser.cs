@@ -228,7 +228,6 @@ namespace FileBrowser
 			selectedNode = desktopNode;
 			selectedItem = ShellBrowser.DesktopItem;
 
-
 			ShellBrowser.DesktopItem.Expand(false, true, IntPtr.Zero);
 
 			foreach(ShellItem desktopChild in ShellBrowser.DesktopItem.SubFolders)
@@ -254,19 +253,9 @@ namespace FileBrowser
 						myCompChildNode.Tag = myCompChild;
 						myCompChildNode.Name = myCompChildNode.Text;
 
-						//if (myCompChild.HasSubfolder)
-						//  myCompChildNode.Nodes.Add(string.Empty);
 						if(myCompChild.Expand(true, true, IntPtr.Zero))
 						{
-							if(myCompChild.SubFiles.Count > 0)
-							{
-								myCompChildNode.Nodes.Add(string.Empty);
-							}
-							//       if (myCompChild.SubFolders[i].HasSubfolder)
-							//     myCompChildNode[i].Nodes.Add(string.Empty);
-
-							//                      if (nodeItem.SubFolders[i].SubFiles.Count > 0)
-							//                        newNodesArray[i].Nodes.Add(string.Empty);
+							myCompChildNode.Nodes.Add(string.Empty);
 						}
 
 						desktopChildNode.Nodes.Add(myCompChildNode);

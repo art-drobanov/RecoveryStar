@@ -1,8 +1,8 @@
 /*----------------------------------------------------------------------+
  |  filename:   FileIntegrityCheck.cs                                   |
  |----------------------------------------------------------------------|
- |  version:    2.20                                                    |
- |  revision:   23.05.2012 17:33                                        |
+ |  version:    2.21                                                    |
+ |  revision:   24.08.2012 15:52                                        |
  |  authors:    Дробанов Артём Федорович (DrAF),                        |
  |              RUSpectrum (г. Оренбург).                               |
  |  e-mail:     draf@mail.ru                                            |
@@ -33,15 +33,6 @@ namespace RecoveryStar
 		public OnEventHandler OnFileIntegrityCheckFinish;
 
 		#endregion Delegates
-
-		#region Constants
-
-		/// <summary>
-		/// Минимальный размер буфера - 16 Мб
-		/// </summary>
-		private const int minBufferLength = 1 << 24;
-
-		#endregion Constants
 
 		#region Public Properties & Data
 
@@ -194,15 +185,7 @@ namespace RecoveryStar
 				// Если класс не занят обработкой - устанавливаем значение...
 				if(!InProcessing)
 				{
-					//... но только если оно не нарушает минимальный размер буфера - 16 Мб
-					if(value > minBufferLength)
-					{
-						this.bufferLength = value - (value % 8);
-					}
-					else
-					{
-						this.bufferLength = minBufferLength;
-					}
+					this.bufferLength = value - (value % 8);
 				}
 			}
 		}
@@ -210,7 +193,7 @@ namespace RecoveryStar
 		/// <summary>
 		/// Размер файлового буфера
 		/// </summary>
-		private int bufferLength;
+		private int bufferLength = 1 << 26; // 64 Мб;
 
 		/// <summary>
 		/// Приоритет процесса
@@ -333,13 +316,6 @@ namespace RecoveryStar
 
 			// Инициализируем имя файла по-умолчанию
 			this.fullFilename = "NONAME";
-
-			// Создаем экземпляр для получения системной информации
-			SystemInfo eMemoryInfo = new SystemInfo();
-
-			// Размер файлового буфера (по-умолчанию) - 1 / 64 общего объема ОЗУ
-			BufferLength = (int)(eMemoryInfo.TotalPhysicalMemory / 64);
-			BufferLength = (BufferLength < 0) ? int.MaxValue : BufferLength;
 
 			// Выделяем память под файловый буфер
 			this.buffer = new byte[this.bufferLength];

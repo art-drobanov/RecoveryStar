@@ -1,8 +1,8 @@
 /*----------------------------------------------------------------------+
  |  filename:   AboutForm.cs                                            |
  |----------------------------------------------------------------------|
- |  version:    2.20                                                    |
- |  revision:   23.05.2012 17:33                                        |
+ |  version:    2.21                                                    |
+ |  revision:   24.08.2012 15:52                                        |
  |  authors:    Дробанов Артём Федорович (DrAF),                        |
  |              RUSpectrum (г. Оренбург).                               |
  |  e-mail:     draf@mail.ru                                            |
@@ -89,7 +89,7 @@ namespace RecoveryStar
 			catch
 			{
 				string message = "Can't load \"RSIcons.dat\"!";
-				string caption = " Recovery Star 2.20";
+				string caption = " Recovery Star 2.21";
 				MessageBoxButtons buttons = MessageBoxButtons.OK;
 				MessageBox.Show(null, message, caption, buttons, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
 			}

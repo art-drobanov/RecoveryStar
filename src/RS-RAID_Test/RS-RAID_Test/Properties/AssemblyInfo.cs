@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 
 [assembly: AssemblyTitle("RS-RAID_Test")]
-[assembly: AssemblyDescription("Recovery Star 2.20 RS-RAID Test")]
+[assembly: AssemblyDescription("Recovery Star 2.21 RS-RAID Test")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("IMIT SPbSPU")]
 [assembly: AssemblyProduct("RS-RAID_Test")]
@@ -36,5 +36,5 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 
-[assembly: AssemblyVersion("2.2.0.39")]
-[assembly: AssemblyFileVersion("2.2.0.39")]
+[assembly: AssemblyVersion("2.2.1.41")]
+[assembly: AssemblyFileVersion("2.2.1.41")]

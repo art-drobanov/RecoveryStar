@@ -1,8 +1,8 @@
 /*----------------------------------------------------------------------+
  |  filename:   ProcessForm.cs                                          |
  |----------------------------------------------------------------------|
- |  version:    2.20                                                    |
- |  revision:   23.05.2012 17:33                                        |
+ |  version:    2.21                                                    |
+ |  revision:   24.08.2012 15:52                                        |
  |  authors:    Дробанов Артём Федорович (DrAF),                        |
  |              RUSpectrum (г. Оренбург).                               |
  |  e-mail:     draf@mail.ru                                            |
@@ -947,7 +947,7 @@ namespace RecoveryStar
 			if(this.stopButtonXP.Text == "Прервать обработку")
 			{
 				string message = "Вы действительно хотите прервать обработку?";
-				string caption = " Recovery Star 2.20";
+				string caption = " Recovery Star 2.21";
 				MessageBoxButtons buttons = MessageBoxButtons.YesNo;
 				DialogResult result = MessageBox.Show(null, message, caption, buttons, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
 

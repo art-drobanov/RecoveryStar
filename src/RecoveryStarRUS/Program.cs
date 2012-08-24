@@ -1,8 +1,8 @@
 /*----------------------------------------------------------------------+
  |  filename:   Program.cs                                              |
  |----------------------------------------------------------------------|
- |  version:    2.20                                                    |
- |  revision:   23.05.2012 17:33                                        |
+ |  version:    2.21                                                    |
+ |  revision:   24.08.2012 15:52                                        |
  |  authors:    Дробанов Артём Федорович (DrAF),                        |
  |              RUSpectrum (г. Оренбург).                               |
  |  e-mail:     draf@mail.ru                                            |
@@ -10,7 +10,6 @@
  +----------------------------------------------------------------------*/
 
 using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace RecoveryStar

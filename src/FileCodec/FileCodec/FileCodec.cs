@@ -1,8 +1,8 @@
 /*----------------------------------------------------------------------+
  |  filename:   FileCodec.cs                                            |
  |----------------------------------------------------------------------|
- |  version:    2.20                                                    |
- |  revision:   23.05.2012 17:33                                        |
+ |  version:    2.21                                                    |
+ |  revision:   24.08.2012 15:52                                        |
  |  authors:    Дробанов Артём Федорович (DrAF),                        |
  |              RUSpectrum (г. Оренбург).                               |
  |  e-mail:     draf@mail.ru                                            |
@@ -931,7 +931,7 @@ namespace RecoveryStar
 				else
 				{
 					//...либо производим жесткий выбор значения
-					currentTotalBufferSize = this.maxTotalBufferSize;
+					currentTotalBufferSize = this.TotalBufferSize;
 				}
 
 				// Теперь важно уточнить, нужен ли такой большой буфер для работы с
@@ -962,6 +962,9 @@ namespace RecoveryStar
 					currentTotalBufferSize = (int)totalBufferSizeNeeded;
 				}
 
+				// Вычисляем размер буфера на том
+				int currentVolumeBufferSize = currentTotalBufferSize / (this.dataCount + this.eccCount);
+
 				// Инициализируем массивы файловых потоков основных томов
 				for(volNum = 0; volNum < this.dataCount; volNum++)
 				{
@@ -975,7 +978,7 @@ namespace RecoveryStar
 					fileName = this.path + fileName;
 
 					//...и открываем на его основе входной файловый поток
-					fileStreamSourceArr[volNum] = new BufferedStream(new FileStream(fileName, FileMode.Open, System.IO.FileAccess.Read), (currentTotalBufferSize / (this.dataCount + this.eccCount)));
+					fileStreamSourceArr[volNum] = new BufferedStream(new FileStream(fileName, FileMode.Open, System.IO.FileAccess.Read), currentVolumeBufferSize);
 
 					// Если есть подписка на делегата обновления прогресса -...
 					if(
@@ -1445,7 +1448,7 @@ namespace RecoveryStar
 				else
 				{
 					//...либо производим жесткий выбор значения
-					currentTotalBufferSize = this.maxTotalBufferSize;
+					currentTotalBufferSize = this.TotalBufferSize;
 				}
 
 				// Теперь важно уточнить, нужен ли такой большой буфер для работы с
@@ -1476,6 +1479,9 @@ namespace RecoveryStar
 					currentTotalBufferSize = (int)totalBufferSizeNeeded;
 				}
 
+				// Вычисляем размер буфера на том
+				int currentVolumeBufferSize = currentTotalBufferSize / (this.dataCount + damagedVolCount);
+
 				// Открываем входные файловые потоки
 				for(int i = 0; i < this.dataCount; i++)
 				{
@@ -1504,7 +1510,7 @@ namespace RecoveryStar
 					}
 
 					//...и открываем на его основе входной файловый поток
-					fileStreamSourceArr[i] = new BufferedStream(new FileStream(fileName, FileMode.Open, System.IO.FileAccess.Read), (currentTotalBufferSize / (this.dataCount + damagedVolCount)));
+					fileStreamSourceArr[i] = new BufferedStream(new FileStream(fileName, FileMode.Open, System.IO.FileAccess.Read), currentVolumeBufferSize);
 
 					// Если есть подписка на делегата обновления прогресса -...
 					if(
