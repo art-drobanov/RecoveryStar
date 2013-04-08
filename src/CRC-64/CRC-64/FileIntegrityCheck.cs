@@ -1,8 +1,8 @@
 /*----------------------------------------------------------------------+
  |  filename:   FileIntegrityCheck.cs                                   |
  |----------------------------------------------------------------------|
- |  version:    2.21                                                    |
- |  revision:   24.08.2012 15:52                                        |
+ |  version:    2.22                                                    |
+ |  revision:   02.04.2013 17:00                                        |
  |  authors:    Дробанов Артём Федорович (DrAF),                        |
  |              RUSpectrum (г. Оренбург).                               |
  |  e-mail:     draf@mail.ru                                            |
@@ -162,7 +162,7 @@ namespace RecoveryStar
 		private UInt64 crc64;
 
 		/// <summary>
-		/// Размер Файлового буфера
+		/// Размер файлового буфера
 		/// </summary>
 		public int BufferLength
 		{
@@ -667,8 +667,8 @@ namespace RecoveryStar
 					}
 				}
 
-					// Если было хотя бы одно исключение - закрываем файловый поток и
-					// сообщаем об ошибке
+				// Если было хотя бы одно исключение - закрываем файловый поток и
+				// сообщаем об ошибке
 				catch
 				{
 					// Закрываем файл
@@ -735,9 +735,10 @@ namespace RecoveryStar
 					eFileStream.Seek(-8, SeekOrigin.End);
 
 					// Читаем сохраненное в конце файла значение CRC-64...
+					int dataLen = 8;
 					int readed = 0;
-					int toRead = 8;
-					while((toRead -= (readed += eFileStream.Read(crc64Arr, readed, toRead))) != 0) ;
+					int toRead = 0;
+					while((toRead = dataLen - (readed += eFileStream.Read(crc64Arr, readed, toRead))) != 0) ;
 
 					//...и закрываем файл
 					if(eFileStream != null)
@@ -747,8 +748,8 @@ namespace RecoveryStar
 					}
 				}
 
-					// Если было хотя бы одно исключение - закрываем файловый поток и
-					// сообщаем об ошибке
+				// Если было хотя бы одно исключение - закрываем файловый поток и
+				// сообщаем об ошибке
 				catch
 				{
 					if(eFileStream != null)

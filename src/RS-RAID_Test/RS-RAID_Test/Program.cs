@@ -1,8 +1,8 @@
 /*----------------------------------------------------------------------+
  |  filename:   Program.cs                                              |
  |----------------------------------------------------------------------|
- |  version:    2.21                                                    |
- |  revision:   24.08.2012 15:52                                        |
+ |  version:    2.22                                                    |
+ |  revision:   02.04.2013 17:00                                        |
  |  authors:    Дробанов Артём Федорович (DrAF),                        |
  |              RUSpectrum (г. Оренбург).                               |
  |  e-mail:     draf@mail.ru                                            |
@@ -25,7 +25,7 @@ namespace RecoveryStar
 
 			Console.Clear();
 			Console.WriteLine("");
-			Console.WriteLine("Recovery Star 2.21 (Cauchy Reed-Solomon Decoder Test)");
+			Console.WriteLine("Recovery Star 2.22 (Cauchy Reed-Solomon Decoder Test)");
 			Console.WriteLine("");
 
 			// Считываем минимальное количество томов

@@ -31,7 +31,7 @@ namespace ShellDll
 			InitVars();
 			browsers = new ArrayList();
 			updateCondition = new ShellItemUpdateCondition();
-			updater = new ShellBrowserUpdater(this);
+			updater = new ShellBrowserUpdater();
 		}
 
 		private void InitVars()

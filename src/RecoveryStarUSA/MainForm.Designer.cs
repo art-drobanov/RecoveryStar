@@ -342,7 +342,7 @@ namespace RecoveryStar
 			this.MaximizeBox = false;
 			this.Name = "MainForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-			this.Text = "Recovery Star 2.21 (USA)";
+			this.Text = "Recovery Star 2.22 (USA)";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
 			this.Load += new System.EventHandler(this.MainForm_Load);
 			this.menuStrip.ResumeLayout(false);

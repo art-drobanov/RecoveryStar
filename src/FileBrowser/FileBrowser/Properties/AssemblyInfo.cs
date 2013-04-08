@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("IMIT SPbSPU")]
 [assembly: AssemblyProduct("FileBrowser")]
-[assembly: AssemblyCopyright("Copyright © 2006 – 2012 DrAF, IMIT SPbSPU.")]
+[assembly: AssemblyCopyright("Copyright © 2006 – 2013 DrAF, IMIT SPbSPU.")]
 [assembly: AssemblyTrademark("Recovery Star")]
 [assembly: AssemblyCulture("")]
 
@@ -35,5 +35,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
 
-[assembly: AssemblyVersion("2.2.1.41")]
-[assembly: AssemblyFileVersion("2.2.1.41")]
+[assembly: AssemblyVersion("2.2.2.43")]
+[assembly: AssemblyFileVersion("2.2.2.43")]

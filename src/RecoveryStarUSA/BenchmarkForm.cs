@@ -1,8 +1,8 @@
 /*----------------------------------------------------------------------+
  |  filename:   BenchmarkForm.cs                                        |
  |----------------------------------------------------------------------|
- |  version:    2.21                                                    |
- |  revision:   24.08.2012 15:52                                        |
+ |  version:    2.22                                                    |
+ |  revision:   02.04.2013 17:00                                        |
  |  authors:    Дробанов Артём Федорович (DrAF),                        |
  |              RUSpectrum (г. Оренбург).                               |
  |  e-mail:     draf@mail.ru                                            |
@@ -245,7 +245,7 @@ namespace RecoveryStar
 			if(!this.eRSRaidEncoder.ConfigIsOK)
 			{
 				string message = "Reed-Solomon Coder configuration error!";
-				string caption = " Recovery Star 2.21";
+				string caption = " Recovery Star 2.22";
 				MessageBoxButtons buttons = MessageBoxButtons.OK;
 				MessageBox.Show(null, message, caption, buttons, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
 

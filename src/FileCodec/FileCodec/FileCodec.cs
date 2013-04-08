@@ -1,8 +1,8 @@
 /*----------------------------------------------------------------------+
  |  filename:   FileCodec.cs                                            |
  |----------------------------------------------------------------------|
- |  version:    2.21                                                    |
- |  revision:   24.08.2012 15:52                                        |
+ |  version:    2.22                                                    |
+ |  revision:   02.04.2013 17:00                                        |
  |  authors:    Дробанов Артём Федорович (DrAF),                        |
  |              RUSpectrum (г. Оренбург).                               |
  |  e-mail:     draf@mail.ru                                            |
@@ -1095,9 +1095,10 @@ namespace RecoveryStar
 					for(int j = 0; j < this.dataCount; j++)
 					{
 						// Читаем пару байт из входного потока
+                        int dataLen = 2;
 						int readed = 0;
-						int toRead = 2;
-						while((toRead -= (readed += fileStreamSourceArr[j].Read(wordBuff, readed, toRead))) != 0) ;
+						int toRead = 0;
+                        while((toRead = dataLen - (readed += fileStreamSourceArr[j].Read(wordBuff, readed, toRead))) != 0) ;
 
 						// Производим слияние двух значений byte в int
 						sourceLog[j] = this.eGF16.Log((int)(((uint)(wordBuff[0] << 0) & 0x00FF)
@@ -1230,8 +1231,8 @@ namespace RecoveryStar
 				}
 			}
 
-				// Если было хотя бы одно исключение - закрываем файловый поток и
-				// сообщаем об ошибке
+			// Если было хотя бы одно исключение - закрываем файловый поток и
+			// сообщаем об ошибке
 			catch
 			{
 				// Закрываем входные файловые потоки
@@ -1627,9 +1628,10 @@ namespace RecoveryStar
 					for(int j = 0; j < this.dataCount; j++)
 					{
 						// Читаем пару байт из входного потока
+						int dataLen = 2;
 						int readed = 0;
-						int toRead = 2;
-						while((toRead -= (readed += fileStreamSourceArr[j].Read(wordBuff, readed, toRead))) != 0) ;
+						int toRead = 0;
+						while((toRead = dataLen - (readed += fileStreamSourceArr[j].Read(wordBuff, readed, toRead))) != 0) ;
 
 						// Производим слияние двух значений byte в int
 						sourceLog[j] = this.eGF16.Log((int)(((uint)(wordBuff[0] << 0) & 0x00FF)
@@ -1765,8 +1767,8 @@ namespace RecoveryStar
 				}
 			}
 
-				// Если было хотя бы одно исключение - закрываем файловый поток и
-				// сообщаем об ошибке
+			// Если было хотя бы одно исключение - закрываем файловый поток и
+			// сообщаем об ошибке
 			catch
 			{
 				// Закрываем входные файловые потоки

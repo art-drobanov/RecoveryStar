@@ -1,8 +1,8 @@
 /*----------------------------------------------------------------------+
  |  filename:   Security.cs                                             |
  |----------------------------------------------------------------------|
- |  version:    2.21                                                    |
- |  revision:   24.08.2012 15:52                                        |
+ |  version:    2.22                                                    |
+ |  revision:   02.04.2013 17:00                                        |
  |  authors:    Дробанов Артём Федорович (DrAF),                        |
  |              RUSpectrum (г. Оренбург).                               |
  |  e-mail:     draf@mail.ru                                            |
@@ -146,8 +146,7 @@ namespace RecoveryStar
 		{
 			Rijndael rijndael = new RijndaelManaged();
 			rijndael.Mode = CipherMode.CBC;
-			rijndael.BlockSize = 256;
-			rijndael.KeySize = 256;
+			rijndael.BlockSize = rijndael.KeySize = 256;
 
 			ICryptoTransform ict = rijndael.CreateEncryptor(key, iv);
 
@@ -171,8 +170,7 @@ namespace RecoveryStar
 		{
 			Rijndael rijndael = new RijndaelManaged();
 			rijndael.Mode = CipherMode.CBC;
-			rijndael.BlockSize = 256;
-			rijndael.KeySize = 256;
+			rijndael.BlockSize = rijndael.KeySize = 256;
 
 			ICryptoTransform ict = rijndael.CreateEncryptor(key, iv);
 
@@ -188,8 +186,7 @@ namespace RecoveryStar
 		{
 			Rijndael rijndael = new RijndaelManaged();
 			rijndael.Mode = CipherMode.CBC;
-			rijndael.BlockSize = 256;
-			rijndael.KeySize = 256;
+			rijndael.BlockSize = rijndael.KeySize = 256;
 
 			ICryptoTransform ict = rijndael.CreateDecryptor(key, iv);
 
@@ -224,8 +221,7 @@ namespace RecoveryStar
 		{
 			Rijndael rijndael = new RijndaelManaged();
 			rijndael.Mode = CipherMode.CBC;
-			rijndael.BlockSize = 256;
-			rijndael.KeySize = 256;
+			rijndael.BlockSize = rijndael.KeySize = 256;
 
 			ICryptoTransform ict = rijndael.CreateDecryptor(key, iv);
 

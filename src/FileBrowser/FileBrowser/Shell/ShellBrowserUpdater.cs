@@ -10,27 +10,12 @@ namespace ShellDll
 	{
 		#region Fields
 
-		private ShellBrowser br;
 		private uint notifyId = 0;
 
 		#endregion
 
-		public ShellBrowserUpdater(ShellBrowser br)
+		public ShellBrowserUpdater()
 		{
-			// this.br = br;
-			//  CreateHandle(new CreateParams());
-
-			// ShellAPI.SHChangeNotifyEntry entry = new ShellAPI.SHChangeNotifyEntry();
-			//  entry.pIdl = br.DesktopItem.PIDLRel.Ptr;
-			//  entry.Recursively = true;
-//
-			//  notifyId = ShellAPI.SHChangeNotifyRegister(
-			//      this.Handle,
-			//     ShellAPI.SHCNRF.InterruptLevel | ShellAPI.SHCNRF.ShellLevel,
-			//     ShellAPI.SHCNE.ALLEVENTS | ShellAPI.SHCNE.INTERRUPT,
-			//     ShellAPI.WM.SH_NOTIFY,
-			//     1,
-			//    new ShellAPI.SHChangeNotifyEntry[] { entry });
 		}
 
 		~ShellBrowserUpdater()
@@ -66,20 +51,9 @@ namespace ShellDll
 						{
 							if(!PIDL.IsEmpty(shNotify.dwItem1))
 							{
-								IntPtr parent, child, relative;
+								IntPtr parent, child;
 								PIDL.SplitPidl(shNotify.dwItem1, out parent, out child);
-
 								PIDL parentPIDL = new PIDL(parent, false);
-								ShellItem parentItem = br.GetShellItem(parentPIDL);
-								if(parentItem != null && parentItem.FilesExpanded && !parentItem.SubFiles.Contains(child))
-								{
-									ShellAPI.SHGetRealIDL(
-										parentItem.ShellFolder,
-										child,
-										out relative);
-									parentItem.AddItem(new ShellItem(br, parentItem, relative));
-								}
-
 								Marshal.FreeCoTaskMem(child);
 								parentPIDL.Free();
 							}
@@ -90,19 +64,6 @@ namespace ShellDll
 						break;
 
 					case ShellAPI.SHCNE.RENAMEITEM:
-
-						#region Rename Item
-
-						{
-							if(!PIDL.IsEmpty(shNotify.dwItem1) && !PIDL.IsEmpty(shNotify.dwItem2))
-							{
-								ShellItem item = br.GetShellItem(new PIDL(shNotify.dwItem1, true));
-								if(item != null)
-									item.Update(shNotify.dwItem2, ShellItemUpdateType.Renamed);
-							}
-						}
-
-						#endregion
 
 						break;
 
@@ -115,12 +76,7 @@ namespace ShellDll
 							{
 								IntPtr parent, child;
 								PIDL.SplitPidl(shNotify.dwItem1, out parent, out child);
-
 								PIDL parentPIDL = new PIDL(parent, false);
-								ShellItem parentItem = br.GetShellItem(parentPIDL);
-								if(parentItem != null && parentItem.SubFiles.Contains(child))
-									parentItem.RemoveItem(parentItem.SubFiles[child]);
-
 								Marshal.FreeCoTaskMem(child);
 								parentPIDL.Free();
 							}
@@ -131,23 +87,6 @@ namespace ShellDll
 						break;
 
 					case ShellAPI.SHCNE.UPDATEITEM:
-
-						#region Update Item
-
-						{
-							if(!PIDL.IsEmpty(shNotify.dwItem1))
-							{
-								ShellItem item = br.GetShellItem(new PIDL(shNotify.dwItem1, true));
-								if(item != null)
-								{
-									Console.Out.WriteLine("Item: {0}", item);
-									item.Update(IntPtr.Zero, ShellItemUpdateType.Updated);
-									item.Update(IntPtr.Zero, ShellItemUpdateType.IconChange);
-								}
-							}
-						}
-
-						#endregion
 
 						break;
 
@@ -164,31 +103,9 @@ namespace ShellDll
 						{
 							if(!PIDL.IsEmpty(shNotify.dwItem1))
 							{
-								IntPtr parent, child, relative;
+								IntPtr parent, child;
 								PIDL.SplitPidl(shNotify.dwItem1, out parent, out child);
-
 								PIDL parentPIDL = new PIDL(parent, false);
-								ShellItem parentItem = br.GetShellItem(parentPIDL);
-								if(parentItem != null && parentItem.FoldersExpanded && !parentItem.SubFolders.Contains(child))
-								{
-									ShellAPI.SHGetRealIDL(
-										parentItem.ShellFolder,
-										child,
-										out relative);
-
-									IntPtr shellFolderPtr;
-									if(parentItem.ShellFolder.BindToObject(
-										relative,
-										IntPtr.Zero,
-										ref ShellAPI.IID_IShellFolder,
-										out shellFolderPtr) == ShellAPI.S_OK)
-									{
-										parentItem.AddItem(new ShellItem(br, parentItem, relative, shellFolderPtr));
-									}
-									else
-										Marshal.FreeCoTaskMem(relative);
-								}
-
 								Marshal.FreeCoTaskMem(child);
 								parentPIDL.Free();
 							}
@@ -199,22 +116,6 @@ namespace ShellDll
 						break;
 
 					case ShellAPI.SHCNE.RENAMEFOLDER:
-
-						#region Rename Directory
-
-						{
-							if(!PIDL.IsEmpty(shNotify.dwItem1) && !PIDL.IsEmpty(shNotify.dwItem2))
-							{
-								ShellItem item = br.GetShellItem(new PIDL(shNotify.dwItem1, false));
-								if(item != null)
-								{
-									//Console.Out.WriteLine("Update: {0}", item);
-									item.Update(shNotify.dwItem2, ShellItemUpdateType.Renamed);
-								}
-							}
-						}
-
-						#endregion
 
 						break;
 
@@ -228,12 +129,7 @@ namespace ShellDll
 							{
 								IntPtr parent, child;
 								PIDL.SplitPidl(shNotify.dwItem1, out parent, out child);
-
 								PIDL parentPIDL = new PIDL(parent, false);
-								ShellItem parentItem = br.GetShellItem(parentPIDL);
-								if(parentItem != null && parentItem.SubFolders.Contains(child))
-									parentItem.RemoveItem(parentItem.SubFolders[child]);
-
 								Marshal.FreeCoTaskMem(child);
 								parentPIDL.Free();
 							}
@@ -246,39 +142,10 @@ namespace ShellDll
 					case ShellAPI.SHCNE.UPDATEDIR:
 					case ShellAPI.SHCNE.ATTRIBUTES:
 
-						#region Update Directory
-
-						{
-							if(!PIDL.IsEmpty(shNotify.dwItem1))
-							{
-								ShellItem item = br.GetShellItem(new PIDL(shNotify.dwItem1, true));
-								if(item != null)
-								{
-									item.Update(IntPtr.Zero, ShellItemUpdateType.Updated);
-									item.Update(IntPtr.Zero, ShellItemUpdateType.IconChange);
-								}
-							}
-						}
-
-						#endregion
-
 						break;
 
 					case ShellAPI.SHCNE.MEDIAINSERTED:
 					case ShellAPI.SHCNE.MEDIAREMOVED:
-
-						#region Media Change
-
-						{
-							if(!PIDL.IsEmpty(shNotify.dwItem1))
-							{
-								ShellItem item = br.GetShellItem(new PIDL(shNotify.dwItem1, true));
-								if(item != null)
-									item.Update(IntPtr.Zero, ShellItemUpdateType.MediaChange);
-							}
-						}
-
-						#endregion
 
 						break;
 
@@ -312,11 +179,6 @@ namespace ShellDll
 			base.WndProc(ref m);
 		}
 
-		private void UpdateRecycleBin()
-		{
-			ShellItem recycleBin = br.DesktopItem["Recycle Bin"];
-			if(recycleBin != null)
-				recycleBin.Update(IntPtr.Zero, ShellItemUpdateType.IconChange);
-		}
+		private void UpdateRecycleBin(){}
 	}
 }

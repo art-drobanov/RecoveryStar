@@ -1,8 +1,8 @@
 /*----------------------------------------------------------------------+
  |  filename:   MainForm.cs                                             |
  |----------------------------------------------------------------------|
- |  version:    2.21                                                    |
- |  revision:   24.08.2012 15:52                                        |
+ |  version:    2.22                                                    |
+ |  revision:   02.04.2013 17:00                                        |
  |  authors:    Дробанов Артём Федорович (DrAF),                        |
  |              RUSpectrum (г. Оренбург).                               |
  |  e-mail:     draf@mail.ru                                            |
@@ -181,7 +181,7 @@ namespace RecoveryStar
 					if(shortFileName.Length > 50)
 					{
 						string message = "Length of the fileName \"" + shortFileName + "\" exceeds 50 symbols! Would you like to skip this file and continue to form processing list?";
-						string caption = " Recovery Star 2.21";
+						string caption = " Recovery Star 2.22";
 						MessageBoxButtons buttons = MessageBoxButtons.YesNo;
 						DialogResult result = MessageBox.Show(null, message, caption, buttons, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
 
@@ -214,7 +214,7 @@ namespace RecoveryStar
 				else
 				{
 					string message = "Selected directory has no accessible files to process!";
-					string caption = " Recovery Star 2.21";
+					string caption = " Recovery Star 2.22";
 					MessageBoxButtons buttons = MessageBoxButtons.OK;
 					MessageBox.Show(null, message, caption, buttons, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
 
@@ -331,7 +331,7 @@ namespace RecoveryStar
 				else
 				{
 					string message = "Selected directory has no accessible files to process!";
-					string caption = " Recovery Star 2.21";
+					string caption = " Recovery Star 2.22";
 					MessageBoxButtons buttons = MessageBoxButtons.OK;
 					MessageBox.Show(null, message, caption, buttons, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
 
@@ -733,7 +733,7 @@ namespace RecoveryStar
 			catch
 			{
 				string message = "Can't open \"HelpUSA.mht\"!";
-				string caption = " Recovery Star 2.21";
+				string caption = " Recovery Star 2.22";
 				MessageBoxButtons buttons = MessageBoxButtons.OK;
 				MessageBox.Show(null, message, caption, buttons, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
 			}

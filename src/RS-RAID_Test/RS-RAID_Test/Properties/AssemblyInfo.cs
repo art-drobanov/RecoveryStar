@@ -7,11 +7,11 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 
 [assembly: AssemblyTitle("RS-RAID_Test")]
-[assembly: AssemblyDescription("Recovery Star 2.21 RS-RAID Test")]
+[assembly: AssemblyDescription("Recovery Star 2.22 RS-RAID Test")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("IMIT SPbSPU")]
 [assembly: AssemblyProduct("RS-RAID_Test")]
-[assembly: AssemblyCopyright("Copyright © 2006 – 2012 DrAF, IMIT SPbSPU.")]
+[assembly: AssemblyCopyright("Copyright © 2006 – 2013 DrAF, IMIT SPbSPU.")]
 [assembly: AssemblyTrademark("Recovery Star")]
 [assembly: AssemblyCulture("")]
 
@@ -36,5 +36,5 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 
-[assembly: AssemblyVersion("2.2.1.41")]
-[assembly: AssemblyFileVersion("2.2.1.41")]
+[assembly: AssemblyVersion("2.2.2.43")]
+[assembly: AssemblyFileVersion("2.2.2.43")]

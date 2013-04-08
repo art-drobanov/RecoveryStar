@@ -61,7 +61,7 @@ namespace RecoveryStar
             this.imitLabel.Name = "imitLabel";
             this.imitLabel.Size = new System.Drawing.Size(228, 13);
             this.imitLabel.TabIndex = 0;
-            this.imitLabel.Text = "© 2006 — 2012  ИМИТ СПбГПУ, Череповец.";
+            this.imitLabel.Text = "© 2006 — 2013  ИМИТ СПбГПУ, Череповец.";
             // 
             // RecoveryStarLabel
             // 
@@ -71,7 +71,7 @@ namespace RecoveryStar
             this.RecoveryStarLabel.Name = "RecoveryStarLabel";
             this.RecoveryStarLabel.Size = new System.Drawing.Size(117, 13);
             this.RecoveryStarLabel.TabIndex = 0;
-            this.RecoveryStarLabel.Text = "Recovery Star 2.21";
+            this.RecoveryStarLabel.Text = "Recovery Star 2.22";
             // 
             // copyrightListBox
             // 
@@ -130,7 +130,7 @@ namespace RecoveryStar
             // 
             // okButtonXP
             // 
-            this.okButtonXP.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(235)))), ((int)(((byte)(233)))), ((int)(((byte)(237)))));
+            this.okButtonXP.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.okButtonXP.DefaultScheme = true;
             this.okButtonXP.DialogResult = System.Windows.Forms.DialogResult.None;
             this.okButtonXP.Hint = "";
@@ -161,7 +161,7 @@ namespace RecoveryStar
             this.Name = "AboutForm";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = " О программе Recovery Star 2.21 (24.08.2012)";
+            this.Text = " О программе Recovery Star 2.22 (02.04.2013)";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AboutForm_FormClosing);
             this.Load += new System.EventHandler(this.AboutForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).EndInit();

@@ -1,8 +1,8 @@
 /*----------------------------------------------------------------------+
  |  filename:   FileSplitter.cs                                         |
  |----------------------------------------------------------------------|
- |  version:    2.21                                                    |
- |  revision:   24.08.2012 15:52                                        |
+ |  version:    2.22                                                    |
+ |  revision:   02.04.2013 17:00                                        |
  |  authors:    Дробанов Артём Федорович (DrAF),                        |
  |              RUSpectrum (г. Оренбург).                               |
  |  e-mail:     draf@mail.ru                                            |
@@ -40,6 +40,11 @@ namespace RecoveryStar
 		/// Указываем размер CBC-блока в килобайтах по-умолчанию (128 Мб)
 		/// </summary>
 		private const int defCbcBlockSize = 1 << 17;
+
+		/// <summary>
+		/// Размер блока 256 бит в байтах
+		/// </summary>
+		private const int bits256 = 32;
 
 		#endregion Constants
 
@@ -731,7 +736,7 @@ namespace RecoveryStar
 				}
 
 				// Выделяем память под файловый буфер
-				this.buffer = new byte[this.bufferLength + 32]; // 32 - довесок для выравнивания потока CryptoStream
+				this.buffer = new byte[this.bufferLength + bits256]; // bits256 - довесок для выравнивания потока CryptoStream
 
 				// Устанавливаем размер тома для режима шифрования данных
 				long secVolumeLength = 0;
@@ -868,21 +873,21 @@ namespace RecoveryStar
 								secVolumeLength = volumeLength;
 
 								// Если установлен режим обеспечения защиты данных, необходимо
-								// обеспечить кратность 32 (это выравнивание по размеру данных
+								// обеспечить кратность bits256 (это выравнивание по размеру данных
 								// шифроблока, 256 бит)
-								if((secVolumeLength % 32) != 0)
+								if((secVolumeLength % bits256) != 0)
 								{
-									secVolumeLength += (32 - (secVolumeLength % 32));
+									secVolumeLength += (bits256 - (secVolumeLength % bits256));
 								}
 
-								// 32 - довесок для выравнивания потока CryptoStream,
+								// bits256 - довесок для выравнивания потока CryptoStream,
 								// и на каждой итерации полным буфером он свой
-								secVolumeLength += (32 * nIterations);
+								secVolumeLength += (bits256 * nIterations);
 
 								// Плюс довесок для последней итерации
 								if(iterRest != 0)
 								{
-									secVolumeLength += 32;
+									secVolumeLength += bits256;
 								}
 							}
 						}
@@ -901,21 +906,21 @@ namespace RecoveryStar
 								secVolumeLength = unwrittenCounter;
 
 								// Если установлен режим обеспечения защиты данных, необходимо
-								// обеспечить кратность 32 (это выравнивание по размеру данных
+								// обеспечить кратность bits256 (это выравнивание по размеру данных
 								// шифроблока, 256 бит)
-								if((secVolumeLength % 32) != 0)
+								if((secVolumeLength % bits256) != 0)
 								{
-									secVolumeLength += (32 - (secVolumeLength % 32));
+									secVolumeLength += (bits256 - (secVolumeLength % bits256));
 								}
 
-								// 32 - довесок для выравнивания потока CryptoStream,
+								// bits256 - довесок для выравнивания потока CryptoStream,
 								// и на каждой итерации полным буфером он свой
-								secVolumeLength += (32 * nIterations);
+								secVolumeLength += (bits256 * nIterations);
 
 								// Плюс довесок для последней итерации
 								if(iterRest != 0)
 								{
-									secVolumeLength += 32;
+									secVolumeLength += bits256;
 								}
 							}
 
@@ -935,15 +940,16 @@ namespace RecoveryStar
 						for(Int64 i = 0; i < nIterations; i++)
 						{
 							// Читаем данные в буфер
+							int dataLen = this.bufferLength;
 							int readed = 0;
-							int toRead = this.bufferLength;
-							while((toRead -= (readed += fileStreamSource.Read(this.buffer, readed, toRead))) != 0) ;
+							int toRead = 0;
+							while((toRead = dataLen - (readed += fileStreamSource.Read(this.buffer, readed, toRead))) != 0) ;
 
 							if(this.eSecurity != null)
 							{
 								// Шифруем данные, если это требуется...
 								this.eSecurity.Encrypt(this.buffer, this.bufferLength);
-								fileStreamTarget.Write(this.buffer, 0, (this.bufferLength + 32)); // 32 - довесок для выравнивания потока CryptoStream
+								fileStreamTarget.Write(this.buffer, 0, (this.bufferLength + bits256)); // bits256 - довесок для выравнивания потока CryptoStream
 							}
 							else
 							{
@@ -1001,9 +1007,10 @@ namespace RecoveryStar
 						if(iterRest > 0)
 						{
 							// Читаем данные в буфер
+							int dataLen = iterRest;
 							int readed = 0;
-							int toRead = iterRest;
-							while((toRead -= (readed += fileStreamSource.Read(this.buffer, readed, toRead))) != 0) ;
+							int toRead = 0;
+							while((toRead = dataLen - (readed += fileStreamSource.Read(this.buffer, readed, toRead))) != 0) ;
 
 							if(this.eSecurity != null)
 							{
@@ -1013,16 +1020,16 @@ namespace RecoveryStar
 								int lastBlockSize = iterRest;
 
 								// Если установлен режим обеспечения защиты данных, необходимо
-								// обеспечить кратность 32 (это выравнивание по размеру данных
+								// обеспечить кратность bits256 (это выравнивание по размеру данных
 								// шифроблока, 256 бит)
-								if((lastBlockSize % 32) != 0)
+								if((lastBlockSize % bits256) != 0)
 								{
-									lastBlockSize += (32 - (lastBlockSize % 32));
+									lastBlockSize += (bits256 - (lastBlockSize % bits256));
 								}
 
 								// Шифруем данные, если это требуется...
 								this.eSecurity.Encrypt(this.buffer, lastBlockSize);
-								fileStreamTarget.Write(this.buffer, 0, (lastBlockSize + 32)); // 32 - довесок для выравнивания потока CryptoStream
+								fileStreamTarget.Write(this.buffer, 0, (lastBlockSize + bits256)); // bits256 - довесок для выравнивания потока CryptoStream
 							}
 							else
 							{
@@ -1129,8 +1136,8 @@ namespace RecoveryStar
 				}
 			}
 
-				// Если было хотя бы одно исключение - закрываем файловые потоки и
-				// сообщаем об ошибке
+			// Если было хотя бы одно исключение - закрываем файловые потоки и
+			// сообщаем об ошибке
 			catch
 			{
 				// Указываем на то, что произошла ошибка работы с файлами
@@ -1252,7 +1259,7 @@ namespace RecoveryStar
 				}
 
 				// Выделяем память под файловый буфер
-				this.buffer = new byte[this.bufferLength + 32]; // 32 - довесок для выравнивания потока CryptoStream
+				this.buffer = new byte[this.bufferLength + bits256]; // bits256 - довесок для выравнивания потока CryptoStream
 
 				// Работаем со всеми основными томами
 				for(volNum = 0; volNum < this.dataCount; ++volNum)
@@ -1293,9 +1300,10 @@ namespace RecoveryStar
 					byte[] dataLengthArr = new byte[8];
 
 					// Читаем сохраненное в конце файла значение CRC-64...
+					int dataLen = 8;
 					int readed = 0;
-					int toRead = 8;
-					while((toRead -= (readed += fileStreamSource.Read(dataLengthArr, readed, toRead))) != 0) ;
+					int toRead = 0;
+					while((toRead = dataLen - (readed += fileStreamSource.Read(dataLengthArr, readed, toRead))) != 0) ;
 
 					// Устанавливаем курсор в файле на начало
 					fileStreamSource.Seek(0, SeekOrigin.Begin);
@@ -1320,12 +1328,13 @@ namespace RecoveryStar
 						if(this.eSecurity != null)
 						{
 							// Читаем данные в буфер (с учетом довеска)
+							dataLen = (this.bufferLength + bits256);
 							readed = 0;
-							toRead = (this.bufferLength + 32);
-							while((toRead -= (readed += fileStreamSource.Read(this.buffer, readed, toRead))) != 0) ;
+							toRead = 0;
+							while((toRead = dataLen - (readed += fileStreamSource.Read(this.buffer, readed, toRead))) != 0) ;
 
 							// Расшифровываем данные, если это требуется...
-							if(!this.eSecurity.Decrypt(this.buffer, (this.bufferLength + 32)))
+							if(!this.eSecurity.Decrypt(this.buffer, (this.bufferLength + bits256)))
 							{
 								// Закрываем исходный и целевой файловые потоки
 								if(fileStreamSource != null)
@@ -1357,9 +1366,10 @@ namespace RecoveryStar
 						else
 						{
 							// Читаем данные в буфер
+							dataLen = this.bufferLength;
 							readed = 0;
-							toRead = this.bufferLength;
-							while((toRead -= (readed += fileStreamSource.Read(this.buffer, readed, toRead))) != 0) ;
+							toRead = 0;
+							while((toRead = dataLen - (readed += fileStreamSource.Read(this.buffer, readed, toRead))) != 0) ;
 
 							//...а иначе пишем без расшифровки (из исходного в целевой)
 							fileStreamTarget.Write(this.buffer, 0, this.bufferLength);
@@ -1419,20 +1429,21 @@ namespace RecoveryStar
 							int lastBlockSize = iterRest;
 
 							// Если установлен режим обеспечения защиты данных, необходимо
-							// обеспечить кратность 32 (это выравнивание по размеру данных
+							// обеспечить кратность bits256 (это выравнивание по размеру данных
 							// шифроблока, 256 бит)
-							if((lastBlockSize % 32) != 0)
+							if((lastBlockSize % bits256) != 0)
 							{
-								lastBlockSize += (32 - (lastBlockSize % 32));
+								lastBlockSize += (bits256 - (lastBlockSize % bits256));
 							}
 
 							// Читаем данные в буфер
+							dataLen = (lastBlockSize + bits256);
 							readed = 0;
-							toRead = (lastBlockSize + 32);
-							while((toRead -= (readed += fileStreamSource.Read(this.buffer, readed, toRead))) != 0) ;
+							toRead = 0;
+							while((toRead = dataLen - (readed += fileStreamSource.Read(this.buffer, readed, toRead))) != 0) ;
 
 							//...расшифровываем данные...
-							if(!this.eSecurity.Decrypt(this.buffer, (lastBlockSize + 32)))
+							if(!this.eSecurity.Decrypt(this.buffer, (lastBlockSize + bits256)))
 							{
 								// Закрываем исходный и целевой файловые потоки
 								if(fileStreamSource != null)
@@ -1465,9 +1476,10 @@ namespace RecoveryStar
 						else
 						{
 							// Читаем данные в буфер
+							dataLen = iterRest;
 							readed = 0;
-							toRead = iterRest;
-							while((toRead -= (readed += fileStreamSource.Read(this.buffer, readed, toRead))) != 0) ;
+							toRead = 0;
+							while((toRead = dataLen - (readed += fileStreamSource.Read(this.buffer, readed, toRead))) != 0) ;
 
 							//...и пишем в целевой файл
 							fileStreamTarget.Write(this.buffer, 0, iterRest);
@@ -1531,8 +1543,8 @@ namespace RecoveryStar
 				}
 			}
 
-				// Если было хотя бы одно исключение - закрываем файловые потоки и
-				// сообщаем об ошибке
+			// Если было хотя бы одно исключение - закрываем файловые потоки и
+			// сообщаем об ошибке
 			catch
 			{
 				// Указываем на то, что произошла ошибка работы с файлами
